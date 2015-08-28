@@ -1,6 +1,7 @@
-Karen Li
+Karen Li (kjl32)
+
 Genre: Puzzle game
 Name: Road Rage 
 Goal: Cross the road from one end to another without colliding with cars
 Basic Mechanics: It's based off of the game, Frogger. I am slightly modifying the game to a different theme. Influenced by my summer trip to India, the character of my game will be a water buffalo instead of a frog, and it will attempt to cross the congested roads of India.
-Levels: I will have different types of automobiles, including autos, motorcycles, and rickshaws. Each automobile runs at a different speed. Each level will contain a different combination of automobiles. As the player passes each level, the speed of the automobiles will increase, and there will be more instances of each vehicle.
+Levels: I will have different types of automobiles, including autos, motorcycles, and rickshaws. Each automobile runs at a different speed. Each level will contain a different combination of automobiles. As the player passes each level, the speed of the automobiles will increase, and there will be more instances of each vehicle. Furthermore, the second level will contain more variety of objects that will act as roadblocks to the persistent water buffalo. For example, I may add a car accident, etc.
