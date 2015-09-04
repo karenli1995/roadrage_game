@@ -300,7 +300,6 @@ public class Level extends Parent {
     }
 
     private void initContent(int level) {
-//        state = STARTING_LEVEL;
         pedDirectionX = 0;
         pedDirectionY = 0;
         levelNumber = level;
@@ -322,7 +321,6 @@ public class Level extends Parent {
         ImageView background = new ImageView();  //set background image
         background.setFocusTraversable(true);
         background.setImage(Config.getImages().get(Config.IMAGE_BACKGROUND));
-        //background.setOpacity(0.7);
 
         Rectangle2D viewportRect = new Rectangle2D(100, 0, 730, 810);   //zoom into the background
         background.setViewport(viewportRect);

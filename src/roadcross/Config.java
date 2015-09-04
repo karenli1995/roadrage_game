@@ -36,8 +36,6 @@ import javafx.scene.image.Image;
 
 public final class Config {
 
-    public static final int MAX_LIVES = 9;
-
     public static final String IMAGE_DIR = "images/desktop/";
 
     public static final int WINDOW_BORDER = 3; // on desktop platform
@@ -50,6 +48,7 @@ public final class Config {
     public static final int CAR_WIDTH = 70;
   
     private static final String[] CAR_IMAGES = new String[] {
+    	//these are all my images that I took on my trip to India
     	"auto1.jpg",
     	"auto2.png",
     	"rickshaw.jpg",
@@ -76,14 +75,15 @@ public final class Config {
 
 
     private static final String[] IMAGES_NAMES = new String[] {
+    	//images are mine unless otherwise specified
     	"welcome.png",
-        "roads.png",
+        "roads.png",  //image from Google
         "waterbuffalo.png",
-        "heart.png",
+        "heart.png", //image from Google
         "gameover.png",
         "youwon.png",
         "splash/pressanykey.png",
-        "splash/roadrage.jpg",
+        "splash/roadrage.jpg",  //image from Google
         "splash/title.png",
     };
 

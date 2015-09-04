@@ -87,7 +87,7 @@ public class LevelData {
         "UUUUU",
         "CCCC",
         "UUUUU",
-        "C",     
+        "CCCC",     
     };
 
     private static ObservableList<Integer> levelsOffsets;
@@ -116,8 +116,7 @@ public class LevelData {
                     levelsOffsets.add(i);
                 }
             }
-            levelsOffsets.add(LEVELS_DATA.length + 1); //changed from +1 //this is for each "NEXT_LEVEL" there is in LEVELS_DATA
-            System.out.println("jen " + levelsOffsets);
+            levelsOffsets.add(LEVELS_DATA.length + 1); //this is for each "NEXT_LEVEL" there is in LEVELS_DATA
         }
     }
 

@@ -48,7 +48,7 @@ public class Main extends Application {
         Config.initialize();
         Group root = new Group();
         mainFrame = new MainFrame(root);
-        stage.setTitle("Roadcross");
+        stage.setTitle("Road Rage");
         stage.setResizable(false);
         stage.setWidth(Config.SCREEN_WIDTH + 2*Config.WINDOW_BORDER);
         stage.setHeight(Config.SCREEN_HEIGHT+ 2*Config.WINDOW_BORDER + Config.TITLE_BAR_HEIGHT);
@@ -79,16 +79,8 @@ public class Main extends Application {
             this.root = root;
         }
 
-        public int getState() {
-            return state;
-        }
-
         public int getLifeCount() {
             return lifeCount;
-        }
-
-        public void increaseLives() {
-            lifeCount = Math.min(lifeCount + 1, Config.MAX_LIVES);
         }
 
         public void decreaseLives() {
