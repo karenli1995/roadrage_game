@@ -22,8 +22,8 @@ Keys/Mouse input: up, down, left, right arrow keys
 
 Cheat Keys: Press "A" to pass a level automatically. 
 
-Known bugs: Cannot restart the game. Also no splash page to declare that you have won the game.
+Known bugs: Cannot restart the game. Also no splash page to declare that you have won the game. Water Buffalo must go past the end of the screen to pass a level (just didn't have time to change coordinates)
 
-Extra features:
+Extra features: none
 
-Impressions/Suggestions:
+Impressions/Suggestions: I enjoyed this project as an introduction to JavaFX. It helped me really learn the APIs and functions of JavaFX, though it was a bit time consuming and I wish I had had more time to work on my game, because bugs still exist.
