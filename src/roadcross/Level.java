@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Karen Li (kjl32)
+
 /*
  * Copyright (c) 2008, 2012 Oracle and/or its affiliates.
  * All rights reserved. Use is subject to license terms.
@@ -57,15 +60,13 @@ public class Level extends Parent {
 
     private Car car;
     private Pedestrian ped;
-    private int pedDirectionX;
-    private int pedDirectionY;
     
     private int levelNumber;
     private ImageView message;
     private Timeline startingTimeline;
     private Timeline timeline;
-
-    public Level(int levelNumber) {
+    
+	public Level(int levelNumber) {
         group = new Group();
         getChildren().add(group);
         initContent(levelNumber); //levelnumber will be 1 first
@@ -102,49 +103,18 @@ public class Level extends Parent {
             public void handle(ActionEvent event) {
             	
                 // Move pedestrian if needed
-                if (pedDirectionX != 0 ) {
-                    movePedX(ped.getTranslateX() + pedDirectionX);
+                if (ped.getPedDirX() != 0 ) {
+                    movePedX(ped.getTranslateX() + ped.getPedDirX());
                 }
-                if (pedDirectionY != 0 ) {
-                    movePedY(ped.getTranslateY() + pedDirectionY);
+                if (ped.getPedDirY() != 0 ) {
+                    movePedY(ped.getTranslateY() + ped.getPedDirY());
                 }
                 
                 //keep pedestrian in bounds
-                if (ped.getTranslateX() < 0) {
-                    ped.setTranslateX(0);
-                }
-                if (ped.getTranslateY() < 0) {
-                    ped.setTranslateY(0);
-                }
-                if (ped.getTranslateY() + ped.getImageLength() > Config.SCREEN_HEIGHT) {
-                	ped.setTranslateY(Config.SCREEN_HEIGHT - ped.getImageLength());
-                }
-                
-                
+                ped.pedInBounds();
+                             
                 // Move cars
-                for(int i=0; i<cars.size(); i++){
-                	ArrayList<Car> eachListCars = cars.get(i);
-                	for(int j=0; j<eachListCars.size(); j++){
-                		Car c = eachListCars.get(j);
-                		if (c != null){
-                			if (c.getCarDirection() != 0) {
-                				if(i%2 == 0){  //depending on even or odd lane
-                					c.moveCar(c.getTranslateY() + c.getCarDirection());
-                					if (c.getTranslateY() >= Config.SCREEN_HEIGHT){    //if car reaches the bottom of the screen
-                						c.moveCar(0 - c.getImageLength());
-                					}
-                				}else{
-                					c.moveCar(c.getTranslateY() - c.getCarDirection());
-                					if (c.getTranslateY() <= 0){   //if car reaches the top of the screen
-                						c.moveCar(Config.SCREEN_HEIGHT - c.getImageLength());
-                					}
-                				}
-                			}
-                		}
-                	}
-                }
-                
-                
+                car.setUpCars(cars);
                 
                 //check for collision between pedestrian and cars   
                 for(int i=0; i<cars.size(); i++){
@@ -169,6 +139,16 @@ public class Level extends Parent {
         });
         timeline.getKeyFrames().add(kf);
     }
+    
+    public void movePedX(double newX) {
+		double x = newX;
+		ped.setTranslateX(x);
+	}
+
+	public void movePedY(double newY) {
+		double y = newY;
+		ped.setTranslateY(y);
+	}
 
     public void start() {
         startingTimeline.play();
@@ -186,10 +166,10 @@ public class Level extends Parent {
     		ped.setVisible(true);
     	}
     	String[] level = LevelData.getLevelData(levelNumber); //{"RRRR","RRRR","RAR",...}
-    	//System.out.println(Arrays.toString(level));
+    	
     	for (int row=0; row<level.length; row++){
     		String type = level[row];
-    		//System.out.println("hi " + type);
+
     		ArrayList<Car> eachRowCars = new ArrayList<Car>(); //keeps track of each row of cars
     		if (type != null) {   //to get to the last level possible
     			for (int col = 0; col < type.length(); col++){
@@ -249,17 +229,6 @@ public class Level extends Parent {
     	}
     }
 
-    private void movePedX(double newX) {
-        double x = newX;
-        ped.setTranslateX(x);
-    }
-    
-    private void movePedY(double newY) {
-        double y = newY;
-        ped.setTranslateY(y);
-    }
-
- 
     private void lostLife() {
         mainFrame.decreaseLives();  //decreases COUNT
         if (mainFrame.getLifeCount() < 1) {
@@ -300,8 +269,7 @@ public class Level extends Parent {
     }
 
     private void initContent(int level) {
-        pedDirectionX = 0;
-        pedDirectionY = 0;
+    	
         levelNumber = level;
         lives = new ArrayList<ImageView>();
 
@@ -332,16 +300,17 @@ public class Level extends Parent {
             public void handle(KeyEvent ke) {
 
                 if ((ke.getCode() == KeyCode.LEFT || ke.getCode() == KeyCode.TRACK_PREV)) {
-                    pedDirectionX = - Config.PED_SPEED;
+                	ped.setPedDirX(- Config.PED_SPEED);
                 }
                 if ((ke.getCode() == KeyCode.RIGHT || ke.getCode() == KeyCode.TRACK_NEXT)) {
-                    pedDirectionX = Config.PED_SPEED;
+                	ped.setPedDirX(Config.PED_SPEED);
+
                 }
                 if ((ke.getCode() == KeyCode.UP)) {
-                    pedDirectionY = - Config.PED_SPEED;
+                	ped.setPedDirY(- Config.PED_SPEED);
                 }
                 if ((ke.getCode() == KeyCode.DOWN)) {
-                    pedDirectionY = Config.PED_SPEED;
+                	ped.setPedDirY(Config.PED_SPEED);
                 }
                 
                 if ((ke.getCode() == KeyCode.ESCAPE)) {
@@ -370,10 +339,10 @@ public class Level extends Parent {
             public void handle(KeyEvent ke) {
                 if (ke.getCode() == KeyCode.LEFT || ke.getCode() == KeyCode.RIGHT ||
                     ke.getCode() == KeyCode.TRACK_PREV || ke.getCode() == KeyCode.TRACK_NEXT) {
-                    pedDirectionX = 0;
+                	ped.setPedDirX(0);
                 }
                 if (ke.getCode() == KeyCode.UP || ke.getCode() == KeyCode.DOWN){
-                	pedDirectionY = 0;
+                	ped.setPedDirY(0);
                 }
             }
         });

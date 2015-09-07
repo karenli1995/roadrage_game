@@ -1,5 +1,11 @@
+// This entire file is part of my masterpiece.
+// Karen Li (kjl32)
+
 package roadcross;
 
+import java.util.ArrayList;
+
+import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -101,5 +107,29 @@ public class Car extends Parent {
         this.setTranslateY(y);
     }
 
+    
+    public void setUpCars(ArrayList<ArrayList<Car>> cars) {
+		for(int i=0; i<cars.size(); i++){
+        	ArrayList<Car> eachListCars = cars.get(i);
+        	for(int j=0; j<eachListCars.size(); j++){
+        		Car c = eachListCars.get(j);
+        		if (c != null){
+        			if (carDirection != 0) {
+        				if(i%2 == 0){  //depending on even or odd lane
+        					c.moveCar(c.getTranslateY() + carDirection);
+        					if (c.getTranslateY() >= Config.SCREEN_HEIGHT){    //if car reaches the bottom of the screen
+        						c.moveCar(0 - imageLength);
+        					}
+        				}else{
+        					c.moveCar(c.getTranslateY() - carDirection);
+        					if (c.getTranslateY() <= 0){   //if car reaches the top of the screen
+        						c.moveCar(Config.SCREEN_HEIGHT - imageLength);
+        					}
+        				}
+        			}
+        		}
+        	}
+        }
+	}
 
 }
